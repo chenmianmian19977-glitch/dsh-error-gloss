@@ -56,10 +56,16 @@
 
 ## 装
 
-首发走官方插件通道：
+**从 GitHub 安装**（当前方式 —— 这个包还没有发布到 npm）：
 
 ```bash
-dsh plugin --profile desktop add dsh-error-gloss
+dsh plugin --profile desktop add https://github.com/chenmianmian19977-glitch/dsh-error-gloss
+```
+
+也可以直接给 tarball 地址（跳过 git clone，更快）：
+
+```bash
+dsh plugin --profile desktop add https://github.com/chenmianmian19977-glitch/dsh-error-gloss/archive/refs/heads/main.tar.gz
 ```
 
 装完在 **设置 → 报错中文注解** 里能看到版本、已加载词条数、命中计数，还有一个「自测」按钮——点一下用内置样本渲染一条完整注解，零请求零模型调用，用来确认装上了。
@@ -69,6 +75,20 @@ dsh plugin --profile desktop add dsh-error-gloss
 ```bash
 dsh plugin --profile desktop remove dsh-error-gloss
 ```
+
+> 仓库里已经带了构建好的 `client/bundle.js`，安装时不需要编译、不需要 npm install，也没有任何运行时依赖。
+> 等发布到 npm 之后，这里会补上 `dsh plugin --profile desktop add dsh-error-gloss` 这种按包名的写法。
+
+### 手动安装（不想用插件管理器）
+
+```bash
+git clone https://github.com/chenmianmian19977-glitch/dsh-error-gloss
+cd dsh-error-gloss
+node tools/install-local.mjs      # 拷进 profile + 追加 bundles + 装载预检
+node tools/uninstall-local.mjs    # 一键回退
+```
+
+两个脚本都幂等，装坏了随时能退干净。
 
 ## 隐私
 
