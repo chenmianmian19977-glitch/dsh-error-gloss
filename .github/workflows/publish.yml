@@ -18,8 +18,8 @@
 name: publish
 
 on:
-  release:
-    types: [published]
+  # npm 发布已暂停（2026-11-05）：没有 npm 账号，改为仅 GitHub 分发。
+  # 保留本工作流备查；确认要发 npm 并配好 Trusted Publisher 后，再放开 release 触发。
   workflow_dispatch:
     inputs:
       dry_run:
