@@ -77,7 +77,7 @@ dsh plugin --profile desktop remove dsh-error-gloss
 ```
 
 > 仓库里已经带了构建好的 `client/bundle.js`，安装时不需要编译、不需要 npm install，也没有任何运行时依赖。
-> 等发布到 npm 之后，这里会补上 `dsh plugin --profile desktop add dsh-error-gloss` 这种按包名的写法。
+> 本项目不发布 npm：DSH 的插件管理器本身就接受 git 地址与 tarball，市场目录也是按 GitHub topic 收录的。
 
 ### 手动安装（不想用插件管理器）
 
