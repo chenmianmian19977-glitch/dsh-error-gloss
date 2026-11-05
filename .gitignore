@@ -21,3 +21,7 @@ crash-*.log
 *.tgz
 .dsh-mount-test/
 
+# 本地凭证与临时密钥（绝不入库）
+.secrets/
+*.token
+

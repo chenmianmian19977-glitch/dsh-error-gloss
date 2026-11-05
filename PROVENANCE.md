@@ -10,6 +10,7 @@
 | `client/icon.png`（插件列表图标） | **CC BY-NC-SA 4.0**，与下方头像同一来源，仅用于标识本插件 |
 | `client/assets/mascot-*.webp`（注解行头像，四表情） | **CC BY-NC-SA 4.0** |
 | `assets/hero.webp`（README 首图） | **CC BY-NC-SA 4.0** |
+| `docs/screenshots/*.png`（README 效果截图） | **CC BY-NC-SA 4.0**：截图里含有上面这个角色形象 |
 
 **明确一点**：本项目对上述美术素材**不授予 MIT**，也不授予任何再许可。
 
