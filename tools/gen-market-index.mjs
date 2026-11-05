@@ -25,21 +25,25 @@ const publishTimestamp = Number(execSync(`git log -1 --format=%ct ${`v${pkg.vers
 
 const index = {
   format: 1,
-  title: { 'zh-cn': '报错中文注解', en: 'Error Gloss' },
+  // 同时给 zh 与 zh-cn：索引校验器只接受小写语言 id，而不同版本的界面
+  // 语言解析器对「主语言子标签」的匹配方式不完全一致，两份都写最稳妥。
+  title: { zh: '报错中文注解', 'zh-cn': '报错中文注解', en: 'Error Gloss' },
   description: {
+    zh: '给 DeepSeek Harness 的每条报错加一行中文释义：40 条词条覆盖全部官方错误码。',
     'zh-cn': '给 DeepSeek Harness 的每条报错加一行中文释义：40 条词条覆盖全部官方错误码。',
     en: 'Chinese annotations for every DeepSeek Harness error: 40 entries covering all official error codes.',
   },
   metadata: {
-    categories: { 'dev-tools': { title: { 'zh-cn': '开发工具', en: 'Developer tools' } } },
-    labels: { i18n: { title: { 'zh-cn': '中文界面', en: 'Chinese UI' } } },
+    categories: { 'dev-tools': { title: { zh: '开发工具', 'zh-cn': '开发工具', en: 'Developer tools' } } },
+    labels: { i18n: { title: { zh: '中文界面', 'zh-cn': '中文界面', en: 'Chinese UI' } } },
     sortKeys: {},
   },
   plugins: [
     {
       name: pkg.name,
-      title: { 'zh-cn': '报错中文注解', en: 'Error Gloss' },
+      title: { zh: '报错中文注解', 'zh-cn': '报错中文注解', en: 'Error Gloss' },
       description: {
+        zh: '报错下方多一行中文注解：释义、影响、可执行建议；原因分「确定 / 可能 / 未验证」三档，原文与 code 完整保留。',
         'zh-cn': '报错下方多一行中文注解：释义、影响、可执行建议；原因分「确定 / 可能 / 未验证」三档，原文与 code 完整保留。',
         en: 'One Chinese line under each error: meaning, impact, actionable advice. Causes are graded certain / likely / unverified; the original text and code are preserved.',
       },

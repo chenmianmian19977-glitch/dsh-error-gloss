@@ -1,10 +1,12 @@
 {
   "format": 1,
   "title": {
+    "zh": "报错中文注解",
     "zh-cn": "报错中文注解",
     "en": "Error Gloss"
   },
   "description": {
+    "zh": "给 DeepSeek Harness 的每条报错加一行中文释义：40 条词条覆盖全部官方错误码。",
     "zh-cn": "给 DeepSeek Harness 的每条报错加一行中文释义：40 条词条覆盖全部官方错误码。",
     "en": "Chinese annotations for every DeepSeek Harness error: 40 entries covering all official error codes."
   },
@@ -12,6 +14,7 @@
     "categories": {
       "dev-tools": {
         "title": {
+          "zh": "开发工具",
           "zh-cn": "开发工具",
           "en": "Developer tools"
         }
@@ -20,6 +23,7 @@
     "labels": {
       "i18n": {
         "title": {
+          "zh": "中文界面",
           "zh-cn": "中文界面",
           "en": "Chinese UI"
         }
@@ -31,10 +35,12 @@
     {
       "name": "dsh-error-gloss",
       "title": {
+        "zh": "报错中文注解",
         "zh-cn": "报错中文注解",
         "en": "Error Gloss"
       },
       "description": {
+        "zh": "报错下方多一行中文注解：释义、影响、可执行建议；原因分「确定 / 可能 / 未验证」三档，原文与 code 完整保留。",
         "zh-cn": "报错下方多一行中文注解：释义、影响、可执行建议；原因分「确定 / 可能 / 未验证」三档，原文与 code 完整保留。",
         "en": "One Chinese line under each error: meaning, impact, actionable advice. Causes are graded certain / likely / unverified; the original text and code are preserved."
       },
@@ -67,7 +73,7 @@
           "source": {
             "type": "git",
             "url": "https://github.com/chenmianmian19977-glitch/dsh-error-gloss",
-            "commit": "2f3a4263f9096e85fbe48ffcd015e745d1403ddc"
+            "commit": "86c65f37e30d66fca8ad52181e84478e7515a6b6"
           }
         }
       ]
