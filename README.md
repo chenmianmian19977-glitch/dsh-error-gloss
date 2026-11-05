@@ -90,6 +90,21 @@ node tools/uninstall-local.mjs    # 一键回退
 
 两个脚本都幂等，装坏了随时能退干净。
 
+### 通过「发现」页安装（插件市场索引源）
+
+DSH 的插件市场不是中心化商店，而是**一组索引源**：每个源是一个 `format: 1` 的 JSON，Host 负责抓取与校验，「发现」页负责展示。
+
+本仓库自带一份索引（[`index.json`](index.json)），校验器 `@deepseek-ai/dsh-plugin-market-index` 已验证通过。用法：
+
+1. 插件 → **发现** → 添加索引源，粘贴：
+   ```
+   https://raw.githubusercontent.com/chenmianmian19977-glitch/dsh-error-gloss/main/index.json
+   ```
+2. 列表里出现「报错中文注解」，点**安装**即可
+
+> 若「发现」标签页不存在：插件页 → 实验性插件 → 更多 → 启用「自定义插件市场」。
+> 索引源是你自己加的，装什么由你决定——界面上那句「索引由第三方提供」是真的。
+
 ## 隐私
 
 - **零遥测**：没有任何统计上报，没有账号、没有设备 ID。
