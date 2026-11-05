@@ -4,7 +4,7 @@
   "description": "给 DeepSeek Harness 的每条报错加一行中文释义：40 条词条覆盖全部官方错误码，原因分「确定/可能/未验证」三档",
   "type": "module",
   "license": "MIT",
-  "icon": "./client/icon.png",
+  "icon": "client/icon.png",
   "main": "./host.js",
   "exports": {
     ".": "./host.js",
@@ -46,7 +46,7 @@
   },
   "dsh": {
     "bundle": {
-      "patch": "./cordis.patch.yml"
+      "patch": "cordis.patch.yml"
     },
     "client": {
       "platform": "web",
