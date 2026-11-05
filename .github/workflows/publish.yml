@@ -1,0 +1,61 @@
+# 发布到 npm —— 用 Trusted Publishing（OIDC），不需要任何 token
+#
+# 为什么用这种方式：npm 从 2027 年 1 月起禁止 granular token 直接发版，
+# 官方推荐 CI 通过 OIDC 换取一次性凭据，并自动生成 provenance（来源证明）。
+#
+# 启用步骤（一次性，在 npmjs.com 上做）：
+#   1. 打开 https://www.npmjs.com/package/dsh-error-gloss/access
+#      （包还没发布时先发一次，或用 npm 账号的 Settings → Trusted Publisher）
+#   2. Trusted Publisher → GitHub Actions
+#   3. 填：
+#        Organization or user: chenmianmian19977-glitch
+#        Repository:           dsh-error-gloss
+#        Workflow filename:    publish.yml
+#        Environment:          （留空）
+#   4. 之后每次在 GitHub 发一个 Release（或手动跑本工作流）就会自动发布
+#
+# 在此之前也可以完全手动发：本地 `npm publish`（需要账号登录）。
+name: publish
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 只打包不发布
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+  id-token: write # Trusted Publishing 必需：换取短时发布凭据
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          registry-url: 'https://registry.npmjs.org'
+
+      # Trusted Publishing 需要 npm >= 11.5；runner 自带的可能偏旧
+      - name: 升级 npm
+        run: npm install -g npm@latest
+
+      - name: 自检（不发版也要过）
+        run: |
+          node src/selftest.mjs
+          node src/fixtures-test.mjs
+          node client/smoke.mjs
+          node client/bundle-test.mjs
+
+      - name: 打包内容预览
+        run: npm pack --dry-run
+
+      - name: 发布
+        if: ${{ github.event_name == 'release' || inputs.dry_run == false }}
+        run: npm publish --provenance --access public
