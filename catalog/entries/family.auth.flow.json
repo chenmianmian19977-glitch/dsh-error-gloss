@@ -1,0 +1,48 @@
+{
+  "id": "family.auth.flow",
+  "code": "",
+  "templateId": "FAMILY",
+  "title": "授权 / 确认流程报错",
+  "summary": "一次需要授权的操作没有走完（被拒绝、重复发起、流程已失效或已取消）。",
+  "causes": [
+    {
+      "text": "一次需要授权的操作没有走完（被拒绝、重复发起、流程已失效或已取消）；具体是哪一项前置条件不满足，只有英文原文里写着",
+      "certainty": "需查"
+    }
+  ],
+  "impact": "该操作未执行；没有产生副作用。",
+  "actions": [
+    {
+      "text": "重新发起操作并按提示确认授权",
+      "op": "点按钮"
+    },
+    {
+      "text": "若被拒绝，检查该工具的权限设置",
+      "op": "改配置"
+    }
+  ],
+  "severity": "error",
+  "retryable": true,
+  "autoRecoverable": false,
+  "causeAssertion": "forbidden",
+  "docRefs": [
+    "app.asar:/dsh/node_modules/@deepseek-ai/dsh-authorization/lib/index.js"
+  ],
+  "logRefs": [
+    "~/.dsh/storages/session_projcache/sessions/{sessionId}.json"
+  ],
+  "match": {
+    "codePattern": "^(?:ALREADY_IN_FLIGHT|DECLINED|DUPLICATE_FLOW|NOT_COMMITTED|NO_FLOW|UNKNOWN_METHOD|CANCELLED)$",
+    "priority": 50
+  },
+  "version": "0.1.0",
+  "evidence": [
+    {
+      "kind": "source-template",
+      "path": "app.asar:/dsh/node_modules/@deepseek-ai/dsh-authorization/lib/index.js",
+      "key": "code 常量 + new HarnessError(msg, 'AUTH.FLOW…')",
+      "sample": "^(?:ALREADY_IN_FLIGHT|DECLINED|DUPLICATE_FLOW|NOT_COMMITTED|NO_FLOW|UNKNOWN_METHOD|CANCELLED)$",
+      "count": 1
+    }
+  ]
+}

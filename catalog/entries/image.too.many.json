@@ -1,0 +1,49 @@
+{
+  "id": "image.too.many",
+  "code": "TOO_MANY_IMAGES",
+  "templateId": "",
+  "title": "图片数量超出上限",
+  "summary": "一次带的图片超过了允许的条数。",
+  "causes": [
+    {
+      "text": "单条消息的图片数量超过上限",
+      "certainty": "确定",
+      "evidenceRef": "E1"
+    }
+  ],
+  "impact": "这条消息没有被发送。",
+  "actions": [
+    {
+      "text": "分几批发，或先合并成一张长图",
+      "op": "点按钮"
+    },
+    {
+      "text": "挑最关键的几张先发",
+      "op": "点按钮"
+    }
+  ],
+  "severity": "warning",
+  "retryable": true,
+  "autoRecoverable": false,
+  "causeAssertion": "allowed",
+  "docRefs": [
+    "app.asar:/dsh/node_modules/@deepseek-ai/dsh-attachment/lib/index.js"
+  ],
+  "logRefs": [
+    "~/.dsh/storages/session_projcache/sessions/{sessionId}.json"
+  ],
+  "match": {
+    "codeExact": "TOO_MANY_IMAGES",
+    "priority": 90
+  },
+  "version": "0.1.0",
+  "evidence": [
+    {
+      "kind": "source-template",
+      "path": "app.asar:/dsh/node_modules/@deepseek-ai/dsh-attachment/lib/index.js",
+      "key": "\"TOO_MANY_IMAGES\"",
+      "sample": "error.code = \"TOO_MANY_IMAGES\" / new HarnessError(…, \"TOO_MANY_IMAGES\")",
+      "count": 1
+    }
+  ]
+}

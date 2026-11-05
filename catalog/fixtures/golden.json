@@ -1,0 +1,69 @@
+[
+  {
+    "id": "screenshot-overflow",
+    "note": "截图里的终止错误，来自 session_projcache 转录",
+    "input": { "code": "CONTEXT_WINDOW_EXCEEDED", "message": "pi-ai detected context overflow for model \"trae-cn/deepseek-v4.1-flash\"" },
+    "expect": { "id": "context.window.exceeded", "assertion": "conditional" }
+  },
+  {
+    "id": "screenshot-compact",
+    "note": "截图里的压缩结算行（UI 加了 compact · 前缀）",
+    "input": { "message": "compact · Compaction could not produce a useful summary. The attempt is recorded in the session log." },
+    "expect": { "id": "compact.summary.empty", "assertion": "conditional" }
+  },
+  {
+    "id": "compact-raw",
+    "note": "同一文案的源码形态（无前缀）",
+    "input": { "message": "Compaction could not produce a useful summary. The attempt is recorded in the session log." },
+    "expect": { "id": "compact.summary.empty", "assertion": "conditional" }
+  },
+  {
+    "id": "duty-log-1546",
+    "note": "用户态真实日志，服务端自由文本；本地信息不足以判因",
+    "input": { "code": "INVALID_REQUEST", "status": 400, "message": "dsh: INVALID_REQUEST: 400: {\"code\":null,\"message\":\"WorkBuddy AI: model [deep-model] service info not found\",\"param\":null,\"type\":\"invalid_request_error\"}" },
+    "expect": { "id": "invalid.request.400.remote", "assertion": "forbidden", "showRaw": true }
+  },
+  {
+    "id": "pnpm-exit1",
+    "note": "插件管理器日志，路径已脱敏",
+    "input": { "message": "Command failed with exit code 1: \"[PATH]\" --expose-internals \"pnpm.mjs\" peers check" },
+    "expect": { "id": "command.exit1", "assertion": "forbidden" }
+  },
+  {
+    "id": "sandbox-denied",
+    "note": "沙箱拒绝模板",
+    "input": { "code": "FS_SANDBOX_DENIED", "message": "[sandbox: file access denied under workspace-write mode]" },
+    "expect": { "id": "fs.sandbox.denied", "assertion": "allowed" }
+  },
+  {
+    "id": "quota",
+    "input": { "code": "QUOTA", "message": "Request quota exhausted." },
+    "expect": { "id": "quota.exhausted", "assertion": "allowed" }
+  },
+  {
+    "id": "auth",
+    "input": { "code": "AUTH", "message": "API key is invalid" },
+    "expect": { "id": "auth.invalid", "assertion": "allowed" }
+  },
+  {
+    "id": "rate-limit",
+    "input": { "code": "RATE_LIMIT", "message": "usage exceeds frequency limit" },
+    "expect": { "id": "rate.limit", "assertion": "allowed" }
+  },
+  {
+    "id": "empty-response",
+    "input": { "code": "EMPTY_RESPONSE", "message": "model \"x\" returned a completed response with no content" },
+    "expect": { "id": "empty.response", "assertion": "allowed" }
+  },
+  {
+    "id": "transport",
+    "input": { "code": "TRANSPORT", "message": "Anthropic stream ended without a stop reason" },
+    "expect": { "id": "transport.stream", "assertion": "conditional" }
+  },
+  {
+    "id": "unknown-code",
+    "note": "未收录码，验证兜底",
+    "input": { "code": "SOME_NEW_CODE_9999", "message": "totally new upstream wording here" },
+    "expect": { "id": "UNKNOWN", "assertion": "forbidden" }
+  }
+]

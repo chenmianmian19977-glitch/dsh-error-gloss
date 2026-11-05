@@ -1,0 +1,51 @@
+{
+  "id": "provider.server",
+  "code": "SERVER",
+  "templateId": "",
+  "title": "模型服务端错误",
+  "summary": "provider 返回了 5xx，属于对方服务故障。",
+  "causes": [
+    {
+      "text": "模型服务临时不可用或过载",
+      "certainty": "可能",
+      "requiresContext": [
+        "provider.response"
+      ]
+    }
+  ],
+  "impact": "本轮没有结果；本地没有出错。",
+  "actions": [
+    {
+      "text": "稍等重试（会自动退避）",
+      "op": "点按钮"
+    },
+    {
+      "text": "换一个 provider 或模型继续",
+      "op": "换模型"
+    }
+  ],
+  "severity": "error",
+  "retryable": true,
+  "autoRecoverable": false,
+  "causeAssertion": "conditional",
+  "docRefs": [
+    "app.asar:/dsh/node_modules/@deepseek-ai/dsh-llm/lib/index.js"
+  ],
+  "logRefs": [
+    "~/.dsh/storages/session_projcache/sessions/{sessionId}.json"
+  ],
+  "match": {
+    "codeExact": "SERVER",
+    "priority": 90
+  },
+  "version": "0.1.0",
+  "evidence": [
+    {
+      "kind": "source-template",
+      "path": "app.asar:/dsh/node_modules/@deepseek-ai/dsh-llm/lib/index.js",
+      "key": "\"SERVER\"",
+      "sample": "error.code = \"SERVER\" / new HarnessError(…, \"SERVER\")",
+      "count": 1
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "id": "quota.exhausted",
+  "code": "QUOTA|ACCOUNT_QUOTA",
+  "templateId": "F17",
+  "title": "额度已用尽",
+  "summary": "当前请求的额度已用尽，重试无效。",
+  "causes": [
+    { "text": "账户额度或余额耗尽", "certainty": "确定", "evidenceRef": "B2/B6" }
+  ],
+  "impact": "本轮请求被拒，重试无效。",
+  "actions": [
+    { "text": "前往账户页充值或等待额度重置", "op": "点按钮" },
+    { "text": "换用其他可用通道", "op": "换模型" }
+  ],
+  "severity": "error",
+  "retryable": false,
+  "autoRecoverable": false,
+  "causeAssertion": "allowed",
+  "docRefs": ["app.asar:/dsh/node_modules/@deepseek-ai/dsh-client-ui-chat/lib/client.js"],
+  "logRefs": [],
+  "match": {
+    "codeExact": "QUOTA|ACCOUNT_QUOTA",
+    "pattern": "^(?:Request quota exhausted\\.|当前请求的额度已用尽)$",
+    "slots": [],
+    "priority": 85
+  },
+  "version": "0.1.0",
+  "evidence": [
+    { "kind": "i18n", "path": "app.asar:/dsh/node_modules/@deepseek-ai/dsh-client-ui-chat/lib/client.js", "sample": "message.failure.quota = 当前请求的额度已用尽 / Request quota exhausted." },
+    { "kind": "source-template", "path": "app.asar:/dsh/node_modules/@deepseek-ai/dsh-llm/lib/index.js", "sample": "QUOTA_EXCEEDED_CODE = \"QUOTA\"" }
+  ]
+}

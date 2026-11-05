@@ -1,0 +1,7 @@
+# 统一 LF：Windows 下默认 autocrlf 会把 .js 换成 CRLF，
+# 而 bundle.js 是被宿主当文本加载的，行尾不该随平台漂移。
+* text=auto eol=lf
+
+*.webp binary
+*.png binary
+*.jpg binary

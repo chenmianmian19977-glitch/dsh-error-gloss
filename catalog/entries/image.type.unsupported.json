@@ -1,0 +1,49 @@
+{
+  "id": "image.type.unsupported",
+  "code": "UNSUPPORTED_IMAGE_TYPE",
+  "templateId": "",
+  "title": "图片格式不支持",
+  "summary": "这个格式不在支持列表里，附件没有被接收。",
+  "causes": [
+    {
+      "text": "文件扩展名/内容不在允许的图片类型中（常见于 webp、heic、svg）",
+      "certainty": "确定",
+      "evidenceRef": "E1"
+    }
+  ],
+  "impact": "这张图片没有被带进对话。",
+  "actions": [
+    {
+      "text": "转成 PNG 或 JPG 后重新拖入",
+      "op": "点按钮"
+    },
+    {
+      "text": "只发文字，让模型用描述代替",
+      "op": "点按钮"
+    }
+  ],
+  "severity": "warning",
+  "retryable": true,
+  "autoRecoverable": false,
+  "causeAssertion": "allowed",
+  "docRefs": [
+    "app.asar:/dsh/node_modules/@deepseek-ai/dsh-attachment/lib/index.js"
+  ],
+  "logRefs": [
+    "~/.dsh/storages/session_projcache/sessions/{sessionId}.json"
+  ],
+  "match": {
+    "codeExact": "UNSUPPORTED_IMAGE_TYPE",
+    "priority": 90
+  },
+  "version": "0.1.0",
+  "evidence": [
+    {
+      "kind": "source-template",
+      "path": "app.asar:/dsh/node_modules/@deepseek-ai/dsh-attachment/lib/index.js",
+      "key": "\"UNSUPPORTED_IMAGE_TYPE\"",
+      "sample": "error.code = \"UNSUPPORTED_IMAGE_TYPE\" / new HarnessError(…, \"UNSUPPORTED_IMAGE_TYPE\")",
+      "count": 1
+    }
+  ]
+}

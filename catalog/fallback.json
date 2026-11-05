@@ -1,0 +1,27 @@
+{
+  "id": "UNKNOWN",
+  "code": "",
+  "title": "未收录的报错",
+  "summary": "这条英文报错尚未收录进词典，下面保留原文；原因未经验证。",
+  "causes": [
+    { "text": "服务端或外部自由文本，本地信息不足以判定", "certainty": "需查", "requiresContext": ["provider.message"] }
+  ],
+  "impact": "本地词典暂无该错误的释义，原始信息已完整保留。",
+  "actions": [
+    { "text": "复制报错原文", "op": "点按钮" },
+    { "text": "打开本会话日志查看上下文", "op": "看日志" },
+    { "text": "新建会话后重试", "op": "新建会话" }
+  ],
+  "severity": "warning",
+  "retryable": false,
+  "autoRecoverable": false,
+  "causeAssertion": "forbidden",
+  "docRefs": [],
+  "logRefs": ["~/.dsh/sessions/", "~/.dsh/cache/error-gloss-misses.jsonl"],
+  "match": { "priority": 0 },
+  "version": "0.1.0",
+  "evidence": [
+    { "kind": "source-template", "path": "app.asar:/dsh/node_modules/@deepseek-ai/dsh-llm-deepseek/lib/index.js", "sample": "failure.message 直接取服务端 error.message" }
+  ],
+  "showRawMessage": true
+}

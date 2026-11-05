@@ -1,0 +1,74 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dsh.local/schemas/error-gloss.v1.json",
+  "title": "dsh-error-gloss 词条 Schema",
+  "type": "object",
+  "required": ["id", "code", "title", "summary", "causes", "impact", "actions", "severity", "retryable", "autoRecoverable", "causeAssertion", "match", "version", "evidence"],
+  "properties": {
+    "id": { "type": "string", "pattern": "^[a-z0-9._-]+$" },
+    "code": { "type": "string", "description": "DSH HarnessError.code，大写下划线；无码时为空串" },
+    "templateId": { "type": "string" },
+    "title": { "type": "string", "maxLength": 20 },
+    "summary": { "type": "string", "maxLength": 80, "description": "禁含因果连词，构建期校验" },
+    "causes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["text", "certainty"],
+        "properties": {
+          "text": { "type": "string" },
+          "certainty": { "enum": ["确定", "可能", "需查"] },
+          "requiresContext": { "type": "array", "items": { "type": "string" } },
+          "evidenceRef": { "type": "string" }
+        }
+      }
+    },
+    "impact": { "type": "string" },
+    "actions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["text", "op"],
+        "properties": {
+          "text": { "type": "string" },
+          "op": { "enum": ["点按钮", "改配置", "换模型", "新建会话", "看日志"] }
+        }
+      }
+    },
+    "severity": { "enum": ["info", "warning", "error", "fatal"] },
+    "retryable": { "type": "boolean" },
+    "autoRecoverable": { "type": "boolean" },
+    "causeAssertion": { "enum": ["allowed", "conditional", "forbidden"] },
+    "docRefs": { "type": "array", "items": { "type": "string" } },
+    "logRefs": { "type": "array", "items": { "type": "string" } },
+    "match": {
+      "type": "object",
+      "required": ["priority"],
+      "properties": {
+        "codeExact": { "type": "string" },
+        "codePattern": { "type": "string", "maxLength": 512, "description": "正则作用于错误码本身，用于整族覆盖（如 ^TEAM_）" },
+        "pattern": { "type": "string", "maxLength": 512 },
+        "slots": { "type": "array", "items": { "type": "string" } },
+        "priority": { "type": "integer" }
+      }
+    },
+    "version": { "type": "string" },
+    "evidence": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["kind", "path"],
+        "properties": {
+          "kind": { "enum": ["runtime-log", "session-projection", "screenshot-transcript", "source-template", "i18n"] },
+          "path": { "type": "string" },
+          "line": { "type": "integer" },
+          "key": { "type": "string" },
+          "sample": { "type": "string" },
+          "count": { "type": "integer" }
+        }
+      }
+    },
+    "showRawMessage": { "type": "boolean" }
+  }
+}

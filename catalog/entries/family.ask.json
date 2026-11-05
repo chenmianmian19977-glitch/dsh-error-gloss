@@ -1,0 +1,48 @@
+{
+  "id": "family.ask",
+  "code": "",
+  "templateId": "FAMILY",
+  "title": "提问 / 交互请求报错",
+  "summary": "向用户发起的一次提问或确认没有走通（超时、参数不合法、发起方已不在）。",
+  "causes": [
+    {
+      "text": "向用户发起的一次提问或确认没有走通（超时、参数不合法、发起方已不在）；具体是哪一项前置条件不满足，只有英文原文里写着",
+      "certainty": "需查"
+    }
+  ],
+  "impact": "这一轮卡在等待用户输入这一步；需要重新发起或手动继续。",
+  "actions": [
+    {
+      "text": "等提示重新出现后作答；一直没有就重新发起该操作",
+      "op": "点按钮"
+    },
+    {
+      "text": "查看原文确认是超时还是参数问题",
+      "op": "看日志"
+    }
+  ],
+  "severity": "error",
+  "retryable": true,
+  "autoRecoverable": false,
+  "causeAssertion": "forbidden",
+  "docRefs": [
+    "app.asar:/dsh/node_modules/@deepseek-ai/dsh-user-questions/lib/index.js"
+  ],
+  "logRefs": [
+    "~/.dsh/storages/session_projcache/sessions/{sessionId}.json"
+  ],
+  "match": {
+    "codePattern": "^(?:ASK|BAD|DELEGATED|DUPLICATE_WAIT|EMPTY_QUESTIONS|REPLY_QUEUED|CALLER_NOT_LIVE|NO_PROVIDER)[A-Z_]*$",
+    "priority": 50
+  },
+  "version": "0.1.0",
+  "evidence": [
+    {
+      "kind": "source-template",
+      "path": "app.asar:/dsh/node_modules/@deepseek-ai/dsh-user-questions/lib/index.js",
+      "key": "code 常量 + new HarnessError(msg, 'ASK…')",
+      "sample": "^(?:ASK|BAD|DELEGATED|DUPLICATE_WAIT|EMPTY_QUESTIONS|REPLY_QUEUED|CALLER_NOT_LIVE|NO_PROVIDER)[A-Z_]*$",
+      "count": 1
+    }
+  ]
+}

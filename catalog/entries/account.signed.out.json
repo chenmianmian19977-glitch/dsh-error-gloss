@@ -1,0 +1,49 @@
+{
+  "id": "account.signed.out",
+  "code": "ACCOUNT_SIGNED_OUT",
+  "templateId": "",
+  "title": "账号已退出",
+  "summary": "登录状态已失效，这次请求没有发出去。",
+  "causes": [
+    {
+      "text": "账号在别处退出、登录凭证过期，或本地凭证被清除",
+      "certainty": "确定",
+      "evidenceRef": "E1"
+    }
+  ],
+  "impact": "本轮停止；已有会话内容不会丢失。",
+  "actions": [
+    {
+      "text": "重新登录账号后重发这条消息",
+      "op": "点按钮"
+    },
+    {
+      "text": "到设置的账号页确认当前登录状态",
+      "op": "点按钮"
+    }
+  ],
+  "severity": "error",
+  "retryable": true,
+  "autoRecoverable": false,
+  "causeAssertion": "allowed",
+  "docRefs": [
+    "app.asar:/dsh/node_modules/@deepseek-ai/dsh-deepseek-account/lib/index.js"
+  ],
+  "logRefs": [
+    "~/.dsh/storages/session_projcache/sessions/{sessionId}.json"
+  ],
+  "match": {
+    "codeExact": "ACCOUNT_SIGNED_OUT",
+    "priority": 90
+  },
+  "version": "0.1.0",
+  "evidence": [
+    {
+      "kind": "source-template",
+      "path": "app.asar:/dsh/node_modules/@deepseek-ai/dsh-deepseek-account/lib/index.js",
+      "key": "\"ACCOUNT_SIGNED_OUT\"",
+      "sample": "error.code = \"ACCOUNT_SIGNED_OUT\" / new HarnessError(…, \"ACCOUNT_SIGNED_OUT\")",
+      "count": 1
+    }
+  ]
+}

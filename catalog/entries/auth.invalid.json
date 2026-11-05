@@ -1,0 +1,32 @@
+{
+  "id": "auth.invalid",
+  "code": "AUTH",
+  "templateId": "F18",
+  "title": "认证失败",
+  "summary": "API 密钥无效或不被接受，重试无效。",
+  "causes": [
+    { "text": "HTTP 401/403 被客户端归类为 AUTH", "certainty": "确定", "evidenceRef": "B3" }
+  ],
+  "impact": "请求被拒，重试无效。",
+  "actions": [
+    { "text": "重新登录或更新 API 密钥", "op": "改配置" },
+    { "text": "确认请求地址支持账号认证", "op": "改配置" }
+  ],
+  "severity": "error",
+  "retryable": false,
+  "autoRecoverable": false,
+  "causeAssertion": "allowed",
+  "docRefs": ["app.asar:/dsh/node_modules/@deepseek-ai/dsh-llm-deepseek/lib/index.js"],
+  "logRefs": [],
+  "match": {
+    "codeExact": "AUTH",
+    "pattern": "^(?:API key is invalid|API 密钥无效)$",
+    "slots": [],
+    "priority": 85
+  },
+  "version": "0.1.0",
+  "evidence": [
+    { "kind": "i18n", "path": "app.asar:/dsh/node_modules/@deepseek-ai/dsh-client-ui-chat/lib/client.js", "sample": "message.failure.auth = API 密钥无效 / API key is invalid" },
+    { "kind": "source-template", "path": "app.asar:/dsh/node_modules/@deepseek-ai/dsh-llm-deepseek/lib/index.js", "sample": "status === 401 || status === 403 ? \"AUTH\"" }
+  ]
+}

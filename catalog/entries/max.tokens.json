@@ -1,0 +1,57 @@
+{
+  "id": "max.tokens",
+  "code": "MAX_TOKENS",
+  "templateId": "",
+  "title": "输出长度达到上限",
+  "summary": "模型单次能输出的 token 用完了，回复被截断。",
+  "causes": [
+    {
+      "text": "单次输出上限（maxTokens）被写满",
+      "certainty": "确定",
+      "evidenceRef": "E1"
+    },
+    {
+      "text": "一次要求产出过多内容（整份长文件、大表格、长代码）",
+      "certainty": "可能"
+    }
+  ],
+  "impact": "回复中途停止，后续步骤没有执行；上下文里已有部分内容。",
+  "actions": [
+    {
+      "text": "说「继续」让它接着写，沿用已产出部分",
+      "op": "点按钮"
+    },
+    {
+      "text": "把大任务拆成几步分别要",
+      "op": "点按钮"
+    },
+    {
+      "text": "在设置 → 模型里调大 maxTokens",
+      "op": "改配置"
+    }
+  ],
+  "severity": "warning",
+  "retryable": true,
+  "autoRecoverable": false,
+  "causeAssertion": "allowed",
+  "docRefs": [
+    "app.asar:/dsh/node_modules/@deepseek-ai/dsh-compaction-basic/lib/index.js"
+  ],
+  "logRefs": [
+    "~/.dsh/storages/session_projcache/sessions/{sessionId}.json"
+  ],
+  "match": {
+    "codeExact": "MAX_TOKENS",
+    "priority": 90
+  },
+  "version": "0.1.0",
+  "evidence": [
+    {
+      "kind": "source-template",
+      "path": "app.asar:/dsh/node_modules/@deepseek-ai/dsh-compaction-basic/lib/index.js",
+      "key": "\"MAX_TOKENS\"",
+      "sample": "error.code = \"MAX_TOKENS\" / new HarnessError(…, \"MAX_TOKENS\")",
+      "count": 1
+    }
+  ]
+}

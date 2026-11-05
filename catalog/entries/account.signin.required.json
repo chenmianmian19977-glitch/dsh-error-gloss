@@ -1,0 +1,49 @@
+{
+  "id": "account.signin.required",
+  "code": "ACCOUNT_SIGN_IN_REQUIRED",
+  "templateId": "",
+  "title": "需要先登录",
+  "summary": "这个操作要求已登录的账号，当前没有可用登录。",
+  "causes": [
+    {
+      "text": "从未登录，或登录已过期",
+      "certainty": "确定",
+      "evidenceRef": "E1"
+    }
+  ],
+  "impact": "该操作没有执行。",
+  "actions": [
+    {
+      "text": "登录账号后重试",
+      "op": "点按钮"
+    },
+    {
+      "text": "若只想用 API Key，改在设置 → 模型里配置",
+      "op": "改配置"
+    }
+  ],
+  "severity": "error",
+  "retryable": true,
+  "autoRecoverable": false,
+  "causeAssertion": "allowed",
+  "docRefs": [
+    "app.asar:/dsh/node_modules/@deepseek-ai/dsh-deepseek-account/lib/index.js"
+  ],
+  "logRefs": [
+    "~/.dsh/storages/session_projcache/sessions/{sessionId}.json"
+  ],
+  "match": {
+    "codeExact": "ACCOUNT_SIGN_IN_REQUIRED",
+    "priority": 90
+  },
+  "version": "0.1.0",
+  "evidence": [
+    {
+      "kind": "source-template",
+      "path": "app.asar:/dsh/node_modules/@deepseek-ai/dsh-deepseek-account/lib/index.js",
+      "key": "\"ACCOUNT_SIGN_IN_REQUIRED\"",
+      "sample": "error.code = \"ACCOUNT_SIGN_IN_REQUIRED\" / new HarnessError(…, \"ACCOUNT_SIGN_IN_REQUIRED\")",
+      "count": 1
+    }
+  ]
+}

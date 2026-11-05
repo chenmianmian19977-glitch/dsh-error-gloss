@@ -1,0 +1,48 @@
+{
+  "id": "family.session",
+  "code": "",
+  "templateId": "FAMILY",
+  "title": "会话操作报错",
+  "summary": "对会话的引用、恢复或查询失败（会话不存在、已被清理、不可恢复）。",
+  "causes": [
+    {
+      "text": "对会话的引用、恢复或查询失败（会话不存在、已被清理、不可恢复）；具体是哪一项前置条件不满足，只有英文原文里写着",
+      "certainty": "需查"
+    }
+  ],
+  "impact": "这条会话相关的操作没有生效；其他会话不受影响。",
+  "actions": [
+    {
+      "text": "回到会话列表重新打开该会话",
+      "op": "点按钮"
+    },
+    {
+      "text": "若提示不可恢复，新建会话并保留结论",
+      "op": "新建会话"
+    }
+  ],
+  "severity": "error",
+  "retryable": false,
+  "autoRecoverable": false,
+  "causeAssertion": "forbidden",
+  "docRefs": [
+    "app.asar:/dsh/node_modules/@deepseek-ai/dsh-session/lib/index.js"
+  ],
+  "logRefs": [
+    "~/.dsh/storages/session_projcache/sessions/{sessionId}.json"
+  ],
+  "match": {
+    "codePattern": "^SESSION_[A-Z_]+$",
+    "priority": 50
+  },
+  "version": "0.1.0",
+  "evidence": [
+    {
+      "kind": "source-template",
+      "path": "app.asar:/dsh/node_modules/@deepseek-ai/dsh-session/lib/index.js",
+      "key": "code 常量 + new HarnessError(msg, 'SESSION…')",
+      "sample": "^SESSION_[A-Z_]+$",
+      "count": 1
+    }
+  ]
+}

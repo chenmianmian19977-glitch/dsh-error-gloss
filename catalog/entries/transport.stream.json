@@ -1,0 +1,32 @@
+{
+  "id": "transport.stream",
+  "code": "TRANSPORT",
+  "templateId": "F22",
+  "title": "模型流传输中断",
+  "summary": "响应流在结束前断开，客户端会自动退避重试。",
+  "causes": [
+    { "text": "网络或提供方流提前终止", "certainty": "可能", "requiresContext": ["provider.message", "network.status"] }
+  ],
+  "impact": "本轮短暂延迟；重试次数用尽后失败。",
+  "actions": [
+    { "text": "等待自动重试", "op": "点按钮" },
+    { "text": "检查代理与 baseURL 连通性", "op": "改配置" }
+  ],
+  "severity": "warning",
+  "retryable": true,
+  "autoRecoverable": true,
+  "causeAssertion": "conditional",
+  "docRefs": ["app.asar:/dsh/node_modules/@deepseek-ai/dsh-llm/lib/types/retry-policy.js"],
+  "logRefs": [],
+  "match": {
+    "codeExact": "TRANSPORT",
+    "pattern": "",
+    "slots": [],
+    "priority": 60
+  },
+  "version": "0.1.0",
+  "evidence": [
+    { "kind": "session-projection", "path": "~/.dsh/sessions/**/session.v4.jsonl.zstd", "sample": "llm/retry failure: Anthropic stream ended without a stop reason / code TRANSPORT", "count": 6 },
+    { "kind": "source-template", "path": "app.asar:/dsh/node_modules/@deepseek-ai/dsh-llm/lib/types/retry-policy.js", "sample": "DEFAULT_RETRYABLE_CODES 含 TRANSPORT" }
+  ]
+}

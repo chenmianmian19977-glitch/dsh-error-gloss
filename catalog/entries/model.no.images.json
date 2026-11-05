@@ -1,0 +1,49 @@
+{
+  "id": "model.no.images",
+  "code": "MODEL_DOES_NOT_SUPPORT_IMAGES",
+  "templateId": "",
+  "title": "该模型不支持图片输入",
+  "summary": "当前模型是纯文本模型，带图的请求会被拒绝。",
+  "causes": [
+    {
+      "text": "所选模型的输入能力里没有 image",
+      "certainty": "确定",
+      "evidenceRef": "E1"
+    }
+  ],
+  "impact": "这条消息没有发出去。",
+  "actions": [
+    {
+      "text": "换成支持图片输入的模型",
+      "op": "换模型"
+    },
+    {
+      "text": "去掉图片，只发文字描述",
+      "op": "点按钮"
+    }
+  ],
+  "severity": "error",
+  "retryable": false,
+  "autoRecoverable": false,
+  "causeAssertion": "allowed",
+  "docRefs": [
+    "app.asar:/dsh/node_modules/@deepseek-ai/dsh-api-session-controller/lib/index.js"
+  ],
+  "logRefs": [
+    "~/.dsh/storages/session_projcache/sessions/{sessionId}.json"
+  ],
+  "match": {
+    "codeExact": "MODEL_DOES_NOT_SUPPORT_IMAGES",
+    "priority": 90
+  },
+  "version": "0.1.0",
+  "evidence": [
+    {
+      "kind": "source-template",
+      "path": "app.asar:/dsh/node_modules/@deepseek-ai/dsh-api-session-controller/lib/index.js",
+      "key": "\"MODEL_DOES_NOT_SUPPORT_IMAGES\"",
+      "sample": "error.code = \"MODEL_DOES_NOT_SUPPORT_IMAGES\" / new HarnessError(…, \"MODEL_DOES_NOT_SUPPORT_IMAGES\")",
+      "count": 1
+    }
+  ]
+}

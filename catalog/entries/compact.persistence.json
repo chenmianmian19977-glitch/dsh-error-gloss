@@ -1,0 +1,31 @@
+{
+  "id": "compact.persistence",
+  "code": "",
+  "templateId": "F06",
+  "title": "压缩完成但保存失败",
+  "summary": "压缩本身完成，会话未能写入磁盘。",
+  "causes": [
+    { "text": "persistence 阶段写入失败", "certainty": "确定", "evidenceRef": "B4" },
+    { "text": "磁盘权限或路径问题", "certainty": "需查", "requiresContext": ["fs.errorCode"] }
+  ],
+  "impact": "下次启动可能回到压缩前的历史。",
+  "actions": [
+    { "text": "检查磁盘与会话目录权限", "op": "改配置" },
+    { "text": "查看应用日志", "op": "看日志" }
+  ],
+  "severity": "error",
+  "retryable": true,
+  "autoRecoverable": false,
+  "causeAssertion": "conditional",
+  "docRefs": ["app.asar:/dsh/node_modules/@deepseek-ai/dsh-command-compact/README.zh.md"],
+  "logRefs": ["~/.dsh/sessions/"],
+  "match": {
+    "pattern": "^Compaction finished, but the session could not be saved\\.$",
+    "slots": [],
+    "priority": 95
+  },
+  "version": "0.1.0",
+  "evidence": [
+    { "kind": "source-template", "path": "app.asar:/dsh/node_modules/@deepseek-ai/dsh-command-compact/lib/index.js", "sample": "case \"persistence\"" }
+  ]
+}

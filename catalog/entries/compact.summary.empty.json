@@ -1,0 +1,33 @@
+{
+  "id": "compact.summary.empty",
+  "code": "",
+  "templateId": "F03",
+  "title": "压缩未生成有效摘要",
+  "summary": "自动压缩执行了，但未产出可用摘要，本轮已停止。",
+  "causes": [
+    { "text": "压缩命令的 summary 分支返回错误", "certainty": "确定", "evidenceRef": "B4" },
+    { "text": "会话 token 压力过大导致摘要被截断", "certainty": "可能", "requiresContext": ["sessionTokens"] }
+  ],
+  "impact": "溢出→压缩→重试的恢复链断在这一步，需要人工处理。",
+  "actions": [
+    { "text": "手动执行 /compact", "op": "点按钮" },
+    { "text": "新建会话并保留关键结论", "op": "新建会话" },
+    { "text": "查看会话日志里的压缩记录", "op": "看日志" }
+  ],
+  "severity": "error",
+  "retryable": true,
+  "autoRecoverable": false,
+  "causeAssertion": "conditional",
+  "docRefs": ["app.asar:/dsh/node_modules/@deepseek-ai/dsh-command-compact/README.zh.md"],
+  "logRefs": ["~/.dsh/storages/session_projcache/sessions/{sessionId}.json"],
+  "match": {
+    "pattern": "^(?:compact · )?Compaction could not produce a useful summary\\.(?: The attempt is recorded in the session log\\.)?$",
+    "slots": [],
+    "priority": 95
+  },
+  "version": "0.1.0",
+  "evidence": [
+    { "kind": "session-projection", "path": "~/.dsh/storages/session_projcache/sessions/session-ac63b682-*.json", "key": "surface[144] / surface[156] / turnOutline.turns[5].response", "sample": "compact · Compaction could not produce a useful summary.", "count": 3 },
+    { "kind": "source-template", "path": "app.asar:/dsh/node_modules/@deepseek-ai/dsh-command-compact/lib/index.js", "sample": "case \"summary\": return { kind: \"error\", text: \"Compaction could not produce a useful summary. …\" }" }
+  ]
+}

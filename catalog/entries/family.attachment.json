@@ -1,0 +1,48 @@
+{
+  "id": "family.attachment",
+  "code": "",
+  "templateId": "FAMILY",
+  "title": "附件处理报错",
+  "summary": "附件上传、读取或类型校验没有通过。",
+  "causes": [
+    {
+      "text": "附件上传、读取或类型校验没有通过；具体是哪一项前置条件不满足，只有英文原文里写着",
+      "certainty": "需查"
+    }
+  ],
+  "impact": "这次附件没有被带进对话；文本部分不受影响。",
+  "actions": [
+    {
+      "text": "换成本地文件重新拖入（避免超长路径或网络位置）",
+      "op": "点按钮"
+    },
+    {
+      "text": "确认文件类型和大小在允许范围内",
+      "op": "看日志"
+    }
+  ],
+  "severity": "error",
+  "retryable": true,
+  "autoRecoverable": false,
+  "causeAssertion": "forbidden",
+  "docRefs": [
+    "app.asar:/dsh/node_modules/@deepseek-ai/dsh-attachment/lib/index.js"
+  ],
+  "logRefs": [
+    "~/.dsh/storages/session_projcache/sessions/{sessionId}.json"
+  ],
+  "match": {
+    "codePattern": "^ATTACHMENT_[A-Z_]+$",
+    "priority": 50
+  },
+  "version": "0.1.0",
+  "evidence": [
+    {
+      "kind": "source-template",
+      "path": "app.asar:/dsh/node_modules/@deepseek-ai/dsh-attachment/lib/index.js",
+      "key": "code 常量 + new HarnessError(msg, 'ATTACHMENT…')",
+      "sample": "^ATTACHMENT_[A-Z_]+$",
+      "count": 1
+    }
+  ]
+}

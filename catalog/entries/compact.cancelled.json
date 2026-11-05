@@ -1,0 +1,29 @@
+{
+  "id": "compact.cancelled",
+  "code": "",
+  "templateId": "F08",
+  "title": "压缩已取消",
+  "summary": "压缩命令被取消，后端已完成清理。",
+  "causes": [
+    { "text": "cancelled 分支返回", "certainty": "确定", "evidenceRef": "B4" }
+  ],
+  "impact": "本次压缩未生效，历史保持不变。",
+  "actions": [
+    { "text": "需要时重新执行 /compact", "op": "点按钮" }
+  ],
+  "severity": "info",
+  "retryable": true,
+  "autoRecoverable": false,
+  "causeAssertion": "allowed",
+  "docRefs": ["app.asar:/dsh/node_modules/@deepseek-ai/dsh-command-compact/README.zh.md"],
+  "logRefs": [],
+  "match": {
+    "pattern": "^Compaction cancelled\\.$",
+    "slots": [],
+    "priority": 95
+  },
+  "version": "0.1.0",
+  "evidence": [
+    { "kind": "source-template", "path": "app.asar:/dsh/node_modules/@deepseek-ai/dsh-command-compact/lib/index.js", "sample": "case \"cancelled\"" }
+  ]
+}

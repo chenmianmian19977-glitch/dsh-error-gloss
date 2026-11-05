@@ -1,0 +1,48 @@
+{
+  "id": "family.tool.invoke",
+  "code": "",
+  "templateId": "FAMILY",
+  "title": "工具调用报错",
+  "summary": "工具不存在、参数不合法、或工具返回的内容不符合约定。",
+  "causes": [
+    {
+      "text": "工具不存在、参数不合法、或工具返回的内容不符合约定；具体是哪一项前置条件不满足，只有英文原文里写着",
+      "certainty": "需查"
+    }
+  ],
+  "impact": "这次工具调用没有结果；模型会据此改写下一次调用。",
+  "actions": [
+    {
+      "text": "让模型重试并修正参数",
+      "op": "点按钮"
+    },
+    {
+      "text": "确认该工具在当前 profile 里已启用",
+      "op": "改配置"
+    }
+  ],
+  "severity": "error",
+  "retryable": true,
+  "autoRecoverable": false,
+  "causeAssertion": "forbidden",
+  "docRefs": [
+    "app.asar:/dsh/node_modules/@deepseek-ai/dsh-tools/lib/index.js"
+  ],
+  "logRefs": [
+    "~/.dsh/storages/session_projcache/sessions/{sessionId}.json"
+  ],
+  "match": {
+    "codePattern": "^(?:UNKNOWN_TOOL|INVALID_ARGS|CODE_RUN_FAILED|INVALID_TOOL_OUTPUT|UNSUPPORTED_SCHEMA)$",
+    "priority": 50
+  },
+  "version": "0.1.0",
+  "evidence": [
+    {
+      "kind": "source-template",
+      "path": "app.asar:/dsh/node_modules/@deepseek-ai/dsh-tools/lib/index.js",
+      "key": "code 常量 + new HarnessError(msg, 'TOOL.INVOKE…')",
+      "sample": "^(?:UNKNOWN_TOOL|INVALID_ARGS|CODE_RUN_FAILED|INVALID_TOOL_OUTPUT|UNSUPPORTED_SCHEMA)$",
+      "count": 1
+    }
+  ]
+}

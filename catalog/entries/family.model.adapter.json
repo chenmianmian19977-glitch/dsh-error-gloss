@@ -1,0 +1,48 @@
+{
+  "id": "family.model.adapter",
+  "code": "",
+  "templateId": "FAMILY",
+  "title": "模型配置 / 适配器报错",
+  "summary": "模型注册表或适配器配置不完整（缺适配器、模型信息不合法、推理档位不支持）。",
+  "causes": [
+    {
+      "text": "模型注册表或适配器配置不完整（缺适配器、模型信息不合法、推理档位不支持）；具体是哪一项前置条件不满足，只有英文原文里写着",
+      "certainty": "需查"
+    }
+  ],
+  "impact": "这次请求没有发出去；不会消耗额度。",
+  "actions": [
+    {
+      "text": "打开设置 → 模型，重新检查该模型的 provider / contextWindow / maxTokens",
+      "op": "改配置"
+    },
+    {
+      "text": "切回一个已知可用的模型确认链路正常",
+      "op": "换模型"
+    }
+  ],
+  "severity": "error",
+  "retryable": false,
+  "autoRecoverable": false,
+  "causeAssertion": "forbidden",
+  "docRefs": [
+    "app.asar:/dsh/node_modules/@deepseek-ai/dsh-llm/lib/index.js"
+  ],
+  "logRefs": [
+    "~/.dsh/storages/session_projcache/sessions/{sessionId}.json"
+  ],
+  "match": {
+    "codePattern": "^(?:NO_ADAPTER|INVALID_ADAPTER|DUPLICATE_ADAPTER|INVALID_DISCOVERY|NO_DISCOVERY|DUPLICATE_DISCOVERY|INVALID_CATALOG|INVALID_DIRECTORY|DUPLICATE_DIRECTORY|INVALID_MODEL_[A-Z_]+|UNSUPPORTED_REASONING_EFFORT|INVALID_PREPARED_CALL|REGISTRATION_DISPOSED)$",
+    "priority": 50
+  },
+  "version": "0.1.0",
+  "evidence": [
+    {
+      "kind": "source-template",
+      "path": "app.asar:/dsh/node_modules/@deepseek-ai/dsh-llm/lib/index.js",
+      "key": "code 常量 + new HarnessError(msg, 'MODEL.ADAPTER…')",
+      "sample": "^(?:NO_ADAPTER|INVALID_ADAPTER|DUPLICATE_ADAPTER|INVALID_DISCOVERY|NO_DISCOVERY|DUPLICATE_DISCOVERY|INVALID_CATALOG|INVALID_DIRECTORY|DUPLICATE_DIRECTORY|INVALID_MODEL_[A-Z_]+|UNSUPPORTED_REASONING_EFFORT|INVALID_PREPARED_CALL|REGISTRATION_DISPOSED)$",
+      "count": 1
+    }
+  ]
+}

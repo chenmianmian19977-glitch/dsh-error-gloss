@@ -1,0 +1,49 @@
+{
+  "id": "image.offload.required",
+  "code": "IMAGE_OFFLOAD_REQUIRED",
+  "templateId": "",
+  "title": "图片需要先转存",
+  "summary": "当前 provider 不接受内联图片，图片要先落成本地文件再引用。",
+  "causes": [
+    {
+      "text": "该 provider/模型只接受文件引用形式的图片，不接受随消息内联的图片数据",
+      "certainty": "确定",
+      "evidenceRef": "E1"
+    }
+  ],
+  "impact": "这次带图请求被拒；文字部分也没有发出去。",
+  "actions": [
+    {
+      "text": "让它先把图片保存到工作目录，再用路径引用",
+      "op": "点按钮"
+    },
+    {
+      "text": "换支持图片输入的模型重试",
+      "op": "换模型"
+    }
+  ],
+  "severity": "warning",
+  "retryable": true,
+  "autoRecoverable": false,
+  "causeAssertion": "allowed",
+  "docRefs": [
+    "app.asar:/dsh/node_modules/@deepseek-ai/dsh-llm/lib/index.js"
+  ],
+  "logRefs": [
+    "~/.dsh/storages/session_projcache/sessions/{sessionId}.json"
+  ],
+  "match": {
+    "codeExact": "IMAGE_OFFLOAD_REQUIRED",
+    "priority": 90
+  },
+  "version": "0.1.0",
+  "evidence": [
+    {
+      "kind": "source-template",
+      "path": "app.asar:/dsh/node_modules/@deepseek-ai/dsh-llm/lib/index.js",
+      "key": "\"IMAGE_OFFLOAD_REQUIRED\"",
+      "sample": "error.code = \"IMAGE_OFFLOAD_REQUIRED\" / new HarnessError(…, \"IMAGE_OFFLOAD_REQUIRED\")",
+      "count": 1
+    }
+  ]
+}

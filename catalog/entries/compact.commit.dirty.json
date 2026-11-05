@@ -1,0 +1,31 @@
+{
+  "id": "compact.commit.dirty",
+  "code": "",
+  "templateId": "F04",
+  "title": "压缩未干净完成",
+  "summary": "压缩过程未完整收尾，部分会话历史可能已改变。",
+  "causes": [
+    { "text": "commit 阶段失败", "certainty": "确定", "evidenceRef": "B4" },
+    { "text": "历史已被部分替换", "certainty": "可能", "requiresContext": ["surface.replaceGeneration"] }
+  ],
+  "impact": "重试前需确认当前会话状态。",
+  "actions": [
+    { "text": "检查当前会话状态后再重试", "op": "看日志" },
+    { "text": "新建会话", "op": "新建会话" }
+  ],
+  "severity": "error",
+  "retryable": true,
+  "autoRecoverable": false,
+  "causeAssertion": "conditional",
+  "docRefs": ["app.asar:/dsh/node_modules/@deepseek-ai/dsh-command-compact/README.zh.md"],
+  "logRefs": [],
+  "match": {
+    "pattern": "^Compaction did not finish cleanly; some session history may have changed\\. Inspect the current session state before retrying\\.$",
+    "slots": [],
+    "priority": 95
+  },
+  "version": "0.1.0",
+  "evidence": [
+    { "kind": "source-template", "path": "app.asar:/dsh/node_modules/@deepseek-ai/dsh-command-compact/lib/index.js", "sample": "case \"commit\"" }
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "id": "transport.timeout",
+  "code": "TIMEOUT",
+  "templateId": "",
+  "title": "请求超时",
+  "summary": "请求在限定时间内没有拿到响应。",
+  "causes": [
+    {
+      "text": "网络或代理链路慢，响应还没回来就到点",
+      "certainty": "可能"
+    },
+    {
+      "text": "provider 侧排队或负载高",
+      "certainty": "可能"
+    }
+  ],
+  "impact": "本轮没有结果；客户端会按退避策略重试。",
+  "actions": [
+    {
+      "text": "等它自动重试；一直超时就手动重发",
+      "op": "点按钮"
+    },
+    {
+      "text": "检查代理是否稳定（长响应容易被中转掐断）",
+      "op": "看日志"
+    }
+  ],
+  "severity": "warning",
+  "retryable": true,
+  "autoRecoverable": false,
+  "causeAssertion": "conditional",
+  "docRefs": [
+    "app.asar:/dsh/node_modules/@deepseek-ai/dsh-llm/lib/index.js"
+  ],
+  "logRefs": [
+    "~/.dsh/storages/session_projcache/sessions/{sessionId}.json"
+  ],
+  "match": {
+    "codeExact": "TIMEOUT",
+    "priority": 90
+  },
+  "version": "0.1.0",
+  "evidence": [
+    {
+      "kind": "source-template",
+      "path": "app.asar:/dsh/node_modules/@deepseek-ai/dsh-llm/lib/index.js",
+      "key": "\"TIMEOUT\"",
+      "sample": "error.code = \"TIMEOUT\" / new HarnessError(…, \"TIMEOUT\")",
+      "count": 1
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "id": "invalid.request.400.remote",
+  "code": "INVALID_REQUEST",
+  "templateId": "F11",
+  "title": "模型服务返回 400",
+  "summary": "请求被模型服务以 400 拒绝，具体原因在英文原文里。",
+  "causes": [
+    { "text": "服务端返回的自由文本，本地信息不足以判定", "certainty": "需查", "requiresContext": ["provider.message"] }
+  ],
+  "impact": "本轮任务中止，宿主可能补占位结果。",
+  "actions": [
+    { "text": "复制报错原文", "op": "点按钮" },
+    { "text": "检查模型配置与通道是否可用", "op": "改配置" },
+    { "text": "换一个模型重试", "op": "换模型" },
+    { "text": "查看运行日志上下文", "op": "看日志" }
+  ],
+  "severity": "error",
+  "retryable": false,
+  "autoRecoverable": false,
+  "causeAssertion": "forbidden",
+  "docRefs": [],
+  "logRefs": ["~/.dsh/bili-duty/duty.log", "~/.dsh/bili-duty/out/{date}.md"],
+  "match": {
+    "codeExact": "INVALID_REQUEST",
+    "pattern": "^dsh: (?<code>[A-Z_]+): (?<status>\\d{3}): \\{\"code\":null,\"message\":\"(?<message>.*)\",\"param\":null,\"type\":\"(?<type>[a-z_]+)\"\\}$",
+    "slots": ["code", "status", "message", "type"],
+    "priority": 80
+  },
+  "version": "0.1.0",
+  "evidence": [
+    { "kind": "runtime-log", "path": "C:\\Users\\MR\\.dsh\\bili-duty\\duty.log", "line": 1546, "sample": "dsh: INVALID_REQUEST: 400: {\"code\":null,\"message\":\"WorkBuddy AI: model [deep-model] service info not found\",…}", "count": 1 },
+    { "kind": "runtime-log", "path": "C:\\Users\\MR\\.dsh\\bili-duty\\out\\2026-11-03.md", "line": 21, "sample": "同上，报告转引", "count": 1 }
+  ],
+  "showRawMessage": true
+}

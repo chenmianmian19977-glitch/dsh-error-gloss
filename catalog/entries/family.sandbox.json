@@ -1,0 +1,48 @@
+{
+  "id": "family.sandbox",
+  "code": "",
+  "templateId": "FAMILY",
+  "title": "沙箱不可用",
+  "summary": "命令需要的沙箱环境没有起来或被策略禁用，命令没有执行。",
+  "causes": [
+    {
+      "text": "命令需要的沙箱环境没有起来或被策略禁用，命令没有执行；具体是哪一项前置条件不满足，只有英文原文里写着",
+      "certainty": "需查"
+    }
+  ],
+  "impact": "这条命令没有跑；文件没有被改动。",
+  "actions": [
+    {
+      "text": "在设置的权限 / 沙箱项里确认沙箱模式",
+      "op": "改配置"
+    },
+    {
+      "text": "改用只读或不需要沙箱的命令重试",
+      "op": "点按钮"
+    }
+  ],
+  "severity": "error",
+  "retryable": true,
+  "autoRecoverable": false,
+  "causeAssertion": "forbidden",
+  "docRefs": [
+    "app.asar:/dsh/node_modules/@deepseek-ai/dsh-sandbox/lib/index.js"
+  ],
+  "logRefs": [
+    "~/.dsh/storages/session_projcache/sessions/{sessionId}.json"
+  ],
+  "match": {
+    "codePattern": "^SANDBOX_[A-Z_]+$",
+    "priority": 50
+  },
+  "version": "0.1.0",
+  "evidence": [
+    {
+      "kind": "source-template",
+      "path": "app.asar:/dsh/node_modules/@deepseek-ai/dsh-sandbox/lib/index.js",
+      "key": "code 常量 + new HarnessError(msg, 'SANDBOX…')",
+      "sample": "^SANDBOX_[A-Z_]+$",
+      "count": 1
+    }
+  ]
+}

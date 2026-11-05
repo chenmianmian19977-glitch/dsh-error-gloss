@@ -1,0 +1,48 @@
+{
+  "id": "family.activation",
+  "code": "",
+  "templateId": "FAMILY",
+  "title": "子任务激活报错",
+  "summary": "子代理 / 续跑任务的激活流程没有走完（正在关闭、被拆除、超出并发上限）。",
+  "causes": [
+    {
+      "text": "子代理 / 续跑任务的激活流程没有走完（正在关闭、被拆除、超出并发上限）；具体是哪一项前置条件不满足，只有英文原文里写着",
+      "certainty": "需查"
+    }
+  ],
+  "impact": "这个子任务没有启动或没能继续；父任务需要重新安排。",
+  "actions": [
+    {
+      "text": "等当前任务收尾后重新发起",
+      "op": "点按钮"
+    },
+    {
+      "text": "减少同时进行的子任务数量",
+      "op": "改配置"
+    }
+  ],
+  "severity": "error",
+  "retryable": true,
+  "autoRecoverable": false,
+  "causeAssertion": "forbidden",
+  "docRefs": [
+    "app.asar:/dsh/node_modules/@deepseek-ai/dsh-subagent/lib/index.js"
+  ],
+  "logRefs": [
+    "~/.dsh/storages/session_projcache/sessions/{sessionId}.json"
+  ],
+  "match": {
+    "codePattern": "^ACTIVATION_[A-Z_]+$",
+    "priority": 50
+  },
+  "version": "0.1.0",
+  "evidence": [
+    {
+      "kind": "source-template",
+      "path": "app.asar:/dsh/node_modules/@deepseek-ai/dsh-subagent/lib/index.js",
+      "key": "code 常量 + new HarnessError(msg, 'ACTIVATION…')",
+      "sample": "^ACTIVATION_[A-Z_]+$",
+      "count": 1
+    }
+  ]
+}

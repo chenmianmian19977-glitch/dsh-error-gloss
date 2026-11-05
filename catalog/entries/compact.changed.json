@@ -1,0 +1,30 @@
+{
+  "id": "compact.changed",
+  "code": "",
+  "templateId": "F05",
+  "title": "压缩期间历史已变化",
+  "summary": "待压缩的历史在替换前被改动，压缩结果被丢弃。",
+  "causes": [
+    { "text": "压缩期间有新消息或工具结果写入", "certainty": "确定", "evidenceRef": "B4" }
+  ],
+  "impact": "本次压缩未生效，历史保持不变。",
+  "actions": [
+    { "text": "稍后重试 /compact", "op": "点按钮" },
+    { "text": "查看会话日志", "op": "看日志" }
+  ],
+  "severity": "warning",
+  "retryable": true,
+  "autoRecoverable": false,
+  "causeAssertion": "allowed",
+  "docRefs": ["app.asar:/dsh/node_modules/@deepseek-ai/dsh-command-compact/README.zh.md"],
+  "logRefs": [],
+  "match": {
+    "pattern": "^The history selected for compaction changed before it could be replaced\\. The attempt is recorded in the session log\\.$",
+    "slots": [],
+    "priority": 95
+  },
+  "version": "0.1.0",
+  "evidence": [
+    { "kind": "source-template", "path": "app.asar:/dsh/node_modules/@deepseek-ai/dsh-command-compact/lib/index.js", "sample": "case \"changed\"" }
+  ]
+}

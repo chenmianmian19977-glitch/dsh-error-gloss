@@ -1,0 +1,48 @@
+{
+  "id": "family.goal",
+  "code": "",
+  "templateId": "FAMILY",
+  "title": "目标（Goal）功能报错",
+  "summary": "长期目标的读写或状态切换被拒绝。与模型、网络无关。",
+  "causes": [
+    {
+      "text": "长期目标的读写或状态切换被拒绝。与模型、网络无关；具体是哪一项前置条件不满足，只有英文原文里写着",
+      "certainty": "需查"
+    }
+  ],
+  "impact": "目标的这次修改没有生效；当前目标保持原状。",
+  "actions": [
+    {
+      "text": "打开目标面板确认当前目标状态后重试",
+      "op": "点按钮"
+    },
+    {
+      "text": "会话里目标被外部改动过时先用 /goal 查看",
+      "op": "看日志"
+    }
+  ],
+  "severity": "error",
+  "retryable": true,
+  "autoRecoverable": false,
+  "causeAssertion": "forbidden",
+  "docRefs": [
+    "app.asar:/dsh/node_modules/@deepseek-ai/dsh-goal/lib/index.js"
+  ],
+  "logRefs": [
+    "~/.dsh/storages/session_projcache/sessions/{sessionId}.json"
+  ],
+  "match": {
+    "codePattern": "^GOAL_[A-Z_]+$",
+    "priority": 50
+  },
+  "version": "0.1.0",
+  "evidence": [
+    {
+      "kind": "source-template",
+      "path": "app.asar:/dsh/node_modules/@deepseek-ai/dsh-goal/lib/index.js",
+      "key": "code 常量 + new HarnessError(msg, 'GOAL…')",
+      "sample": "^GOAL_[A-Z_]+$",
+      "count": 1
+    }
+  ]
+}

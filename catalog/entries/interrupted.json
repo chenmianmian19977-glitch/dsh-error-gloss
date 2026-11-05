@@ -1,0 +1,49 @@
+{
+  "id": "interrupted",
+  "code": "INTERRUPTED",
+  "templateId": "",
+  "title": "本轮已中止",
+  "summary": "这一轮被主动中止，模型输出停在这里。",
+  "causes": [
+    {
+      "text": "你点了停止，或客户端因切换会话/关闭窗口而中断了本轮",
+      "certainty": "确定",
+      "evidenceRef": "E1"
+    }
+  ],
+  "impact": "已经产出的内容保留；本轮后续的步骤不会执行。",
+  "actions": [
+    {
+      "text": "说一句「继续」让它接着做",
+      "op": "点按钮"
+    },
+    {
+      "text": "若本来就要停，忽略即可；已写出的内容已经落盘",
+      "op": "点按钮"
+    }
+  ],
+  "severity": "warning",
+  "retryable": true,
+  "autoRecoverable": false,
+  "causeAssertion": "allowed",
+  "docRefs": [
+    "app.asar:/dsh/node_modules/@deepseek-ai/dsh-client-ui-chat/lib/index.js"
+  ],
+  "logRefs": [
+    "~/.dsh/storages/session_projcache/sessions/{sessionId}.json"
+  ],
+  "match": {
+    "codeExact": "INTERRUPTED",
+    "priority": 90
+  },
+  "version": "0.1.0",
+  "evidence": [
+    {
+      "kind": "source-template",
+      "path": "app.asar:/dsh/node_modules/@deepseek-ai/dsh-client-ui-chat/lib/index.js",
+      "key": "\"INTERRUPTED\"",
+      "sample": "error.code = \"INTERRUPTED\" / new HarnessError(…, \"INTERRUPTED\")",
+      "count": 1
+    }
+  ]
+}

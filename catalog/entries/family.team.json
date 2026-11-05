@@ -1,0 +1,48 @@
+{
+  "id": "family.team",
+  "code": "",
+  "templateId": "FAMILY",
+  "title": "团队协作功能报错",
+  "summary": "agent 团队（多成员协作）的一次操作被拒绝。与模型、网络无关。",
+  "causes": [
+    {
+      "text": "agent 团队（多成员协作）的一次操作被拒绝。与模型、网络无关；具体是哪一项前置条件不满足，只有英文原文里写着",
+      "certainty": "需查"
+    }
+  ],
+  "impact": "团队面板里这次操作没有生效；成员、任务或消息保持原样。",
+  "actions": [
+    {
+      "text": "在团队面板里刷新后重试该操作",
+      "op": "点按钮"
+    },
+    {
+      "text": "查看报错原文里的具体说明（英文原文通常直接点明哪个前置条件不满足）",
+      "op": "看日志"
+    }
+  ],
+  "severity": "error",
+  "retryable": true,
+  "autoRecoverable": false,
+  "causeAssertion": "forbidden",
+  "docRefs": [
+    "app.asar:/dsh/node_modules/@deepseek-ai/dsh-experimental-agent-team/lib/index.js"
+  ],
+  "logRefs": [
+    "~/.dsh/storages/session_projcache/sessions/{sessionId}.json"
+  ],
+  "match": {
+    "codePattern": "^TEAM_[A-Z_]+$",
+    "priority": 50
+  },
+  "version": "0.1.0",
+  "evidence": [
+    {
+      "kind": "source-template",
+      "path": "app.asar:/dsh/node_modules/@deepseek-ai/dsh-experimental-agent-team/lib/index.js",
+      "key": "code 常量 + new HarnessError(msg, 'TEAM…')",
+      "sample": "^TEAM_[A-Z_]+$",
+      "count": 1
+    }
+  ]
+}

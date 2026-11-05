@@ -1,0 +1,6 @@
+# dsh-error-gloss bundle patch — A 阶段本地开发用
+# 单 insert，无 config 覆盖；删除本行即完全回退。
+# 与本机 dsh-context/cordis.patch.yml 的最简形态一致。
+- insert:
+    - id: dsh-error-gloss
+      name: dsh-error-gloss

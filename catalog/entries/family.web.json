@@ -1,0 +1,48 @@
+{
+  "id": "family.web",
+  "code": "",
+  "templateId": "FAMILY",
+  "title": "联网抓取报错",
+  "summary": "网页抓取或搜索请求没有完成（被站点拦截、超时、地址不被允许）。",
+  "causes": [
+    {
+      "text": "网页抓取或搜索请求没有完成（被站点拦截、超时、地址不被允许）；具体是哪一项前置条件不满足，只有英文原文里写着",
+      "certainty": "需查"
+    }
+  ],
+  "impact": "这次联网没有拿到内容；模型会基于已有信息继续或说明缺料。",
+  "actions": [
+    {
+      "text": "换一个来源或稍后重试",
+      "op": "点按钮"
+    },
+    {
+      "text": "检查目标站是否需要登录 / 是否被墙",
+      "op": "看日志"
+    }
+  ],
+  "severity": "error",
+  "retryable": true,
+  "autoRecoverable": false,
+  "causeAssertion": "forbidden",
+  "docRefs": [
+    "app.asar:/dsh/node_modules/@deepseek-ai/dsh-web-fetch-http/lib/index.js"
+  ],
+  "logRefs": [
+    "~/.dsh/storages/session_projcache/sessions/{sessionId}.json"
+  ],
+  "match": {
+    "codePattern": "^WEB_[A-Z_]+$",
+    "priority": 50
+  },
+  "version": "0.1.0",
+  "evidence": [
+    {
+      "kind": "source-template",
+      "path": "app.asar:/dsh/node_modules/@deepseek-ai/dsh-web-fetch-http/lib/index.js",
+      "key": "code 常量 + new HarnessError(msg, 'WEB…')",
+      "sample": "^WEB_[A-Z_]+$",
+      "count": 1
+    }
+  ]
+}

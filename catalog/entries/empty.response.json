@@ -1,0 +1,31 @@
+{
+  "id": "empty.response",
+  "code": "EMPTY_RESPONSE",
+  "templateId": "F02",
+  "title": "模型返回空响应",
+  "summary": "模型正常结束但没有产出任何内容，客户端会安全重试。",
+  "causes": [
+    { "text": "提供方偶发的退化补全（terminal stop 且零输出）", "certainty": "确定", "evidenceRef": "B2" }
+  ],
+  "impact": "本次尝试未产生可用内容，在默认重试白名单内。",
+  "actions": [
+    { "text": "等待自动重试", "op": "点按钮" },
+    { "text": "持续出现时换模型", "op": "换模型" }
+  ],
+  "severity": "warning",
+  "retryable": true,
+  "autoRecoverable": true,
+  "causeAssertion": "allowed",
+  "docRefs": ["app.asar:/dsh/node_modules/@deepseek-ai/dsh-llm/README.zh.md"],
+  "logRefs": [],
+  "match": {
+    "codeExact": "EMPTY_RESPONSE",
+    "pattern": "^model \"(?<model>[^\"]+)\" returned a completed response with no content$",
+    "slots": ["model"],
+    "priority": 88
+  },
+  "version": "0.1.0",
+  "evidence": [
+    { "kind": "source-template", "path": "app.asar:/dsh/node_modules/@deepseek-ai/dsh-llm-pi-ai/lib/index.js", "sample": "model \"${message.model}\" returned a completed response with no content" }
+  ]
+}

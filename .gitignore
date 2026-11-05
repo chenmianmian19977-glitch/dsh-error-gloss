@@ -1,0 +1,23 @@
+# 依赖与构建产物
+node_modules/
+package-lock.json
+pnpm-lock.yaml
+
+# 会话语料、备份、本机快照（绝不入库）
+*.bak
+*.bak-*
+*.log
+diag*.json
+crash-*.log
+
+# 个人会话记忆（工作区内部用，不进开源仓库）
+.workbuddy/
+
+# 本地开发索引与内部笔记（含本机绝对路径、验收过程记录，不进公开仓库）
+/INDEX.md
+/notes/
+
+# 打包产物
+*.tgz
+.dsh-mount-test/
+

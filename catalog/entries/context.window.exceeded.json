@@ -1,0 +1,36 @@
+{
+  "id": "context.window.exceeded",
+  "code": "CONTEXT_WINDOW_EXCEEDED",
+  "templateId": "F01",
+  "title": "上下文窗口超限",
+  "summary": "本次请求携带的内容超过模型可用上下文，本轮已停止。",
+  "causes": [
+    { "text": "会话累计 token 超过模型 contextWindow", "certainty": "可能", "requiresContext": ["sessionTokens", "modelContextWindow"] },
+    { "text": "模型表 contextWindow 配置偏小，与实际可用窗口不符", "certainty": "可能", "requiresContext": ["modelContextWindow", "provider.response"] },
+    { "text": "单次工具输出或图片体积过大", "certainty": "需查", "requiresContext": ["toolOutputBytes", "imageCount"] }
+  ],
+  "impact": "本轮回复中断；自动压缩成功时会自动重试，压缩失败则需要人工介入。",
+  "actions": [
+    { "text": "新建会话，把长材料拆成几段", "op": "新建会话" },
+    { "text": "换用 contextWindow 更大的模型", "op": "换模型" },
+    { "text": "查看会话 token 曲线与工具输出体积", "op": "看日志" }
+  ],
+  "severity": "error",
+  "retryable": true,
+  "autoRecoverable": true,
+  "causeAssertion": "conditional",
+  "docRefs": ["app.asar:/dsh/node_modules/@deepseek-ai/dsh-compaction-basic/README.zh.md"],
+  "logRefs": ["~/.dsh/storages/session_projcache/sessions/{sessionId}.json", "~/.dsh/sessions/**/{sessionId}/session.v4.jsonl.zstd"],
+  "match": {
+    "codeExact": "CONTEXT_WINDOW_EXCEEDED",
+    "pattern": "^pi-ai detected context overflow for model \"(?<model>[^\"]+)\"$",
+    "slots": ["model"],
+    "priority": 90
+  },
+  "version": "0.1.0",
+  "evidence": [
+    { "kind": "source-template", "path": "app.asar:/dsh/node_modules/@deepseek-ai/dsh-llm-pi-ai/lib/index.js", "sample": "pi-ai detected context overflow for model \"${message.model}\"", "count": 1 },
+    { "kind": "screenshot-transcript", "path": "~/.dsh/storages/session_projcache/sessions/d900b970-*.json", "key": "$.record.rows.titleInput.val.first.text", "sample": "model \"trae-cn/deepseek-v4.1-flash\" 右侧标签 CONTEXT_WINDOW_EXCEEDED" },
+    { "kind": "session-projection", "path": "~/.dsh/storages/session_projcache/sessions/session-ac63b682-*.json", "key": "surface[163]", "sample": "contextWindow: 116000，实际会话 30–37 万 token；250034 token 输入得到 HTTP 200" }
+  ]
+}

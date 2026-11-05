@@ -1,0 +1,32 @@
+{
+  "id": "command.exit1",
+  "code": "",
+  "templateId": "F12",
+  "title": "外部命令执行失败",
+  "summary": "插件管理器调用的子命令以退出码 1 结束。",
+  "causes": [
+    { "text": "子命令自身失败，原因在命令输出里", "certainty": "需查", "requiresContext": ["command.stdout"] }
+  ],
+  "impact": "该次安装或检查操作未完成。",
+  "actions": [
+    { "text": "打开对应 pnpm.log 看完整输出", "op": "看日志" },
+    { "text": "重试该操作", "op": "点按钮" }
+  ],
+  "severity": "warning",
+  "retryable": true,
+  "autoRecoverable": false,
+  "causeAssertion": "forbidden",
+  "docRefs": [],
+  "logRefs": ["~/.dsh/profiles/desktop/.plugin-manager/logs/operation-{id}/pnpm.log"],
+  "match": {
+    "pattern": "^Command failed with exit code (?<n>\\d+): \"(?<path>[^\"]+)\" (?<args>.*)$",
+    "slots": ["n", "path", "args"],
+    "priority": 70
+  },
+  "version": "0.1.0",
+  "evidence": [
+    { "kind": "runtime-log", "path": "~/.dsh/profiles/desktop/.plugin-manager/logs/operation-Z8EuCu/pnpm.log", "line": 1, "sample": "…peers check", "count": 1 },
+    { "kind": "runtime-log", "path": "~/.dsh/profiles/desktop/.plugin-manager/logs/operation-fHlLJD/pnpm.log", "line": 1, "sample": "…add dsh-tide-ui", "count": 1 }
+  ],
+  "showRawMessage": true
+}

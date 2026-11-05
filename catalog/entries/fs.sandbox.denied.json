@@ -1,0 +1,31 @@
+{
+  "id": "fs.sandbox.denied",
+  "code": "FS_SANDBOX_DENIED",
+  "templateId": "F09",
+  "title": "文件操作被沙箱拒绝",
+  "summary": "当前沙箱模式不允许这次写操作。",
+  "causes": [
+    { "text": "目标路径不在当前模式允许的工作区或临时目录内", "certainty": "确定", "evidenceRef": "B5" }
+  ],
+  "impact": "该文件操作被拒绝，命令其余部分按原样保留。",
+  "actions": [
+    { "text": "按提示用更宽模式重试同一条命令一次", "op": "点按钮" },
+    { "text": "把目标改到工作区内", "op": "改配置" }
+  ],
+  "severity": "warning",
+  "retryable": true,
+  "autoRecoverable": false,
+  "causeAssertion": "allowed",
+  "docRefs": ["app.asar:/dsh/node_modules/@deepseek-ai/dsh-fs-sandbox/README.md"],
+  "logRefs": [],
+  "match": {
+    "codeExact": "FS_SANDBOX_DENIED",
+    "pattern": "^\\[sandbox: file access denied under (?<mode>[a-z-]+) mode\\]$",
+    "slots": ["mode"],
+    "priority": 90
+  },
+  "version": "0.1.0",
+  "evidence": [
+    { "kind": "source-template", "path": "app.asar:/dsh/node_modules/@deepseek-ai/dsh-fs-sandbox/README.md", "sample": "A denied mutation returns an `FS_SANDBOX_DENIED` error … `[sandbox: file access denied under <mode> mode]`" }
+  ]
+}

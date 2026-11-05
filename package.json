@@ -1,0 +1,65 @@
+{
+  "name": "dsh-error-gloss",
+  "version": "0.1.0",
+  "description": "给 DeepSeek Harness 的每条报错加一行中文释义：40 条词条覆盖全部官方错误码，原因分「确定/可能/未验证」三档",
+  "type": "module",
+  "license": "MIT",
+  "icon": "./client/icon.png",
+  "main": "./host.js",
+  "exports": {
+    ".": "./host.js",
+    "./client": "./client/bundle.js",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "host.js",
+    "cordis.patch.yml",
+    "client/bundle.js",
+    "client/icon.png",
+    "client/assets",
+    "README.md",
+    "LICENSE",
+    "NOTICE.md",
+    "PROVENANCE.md"
+  ],
+  "keywords": [
+    "dsh",
+    "dsh-plugin",
+    "dsh-plugins",
+    "deepseek-harness",
+    "error-message",
+    "localization",
+    "i18n",
+    "chinese"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chenmianmian19977-glitch/dsh-error-gloss.git"
+  },
+  "homepage": "https://github.com/chenmianmian19977-glitch/dsh-error-gloss#readme",
+  "bugs": {
+    "url": "https://github.com/chenmianmian19977-glitch/dsh-error-gloss/issues"
+  },
+  "author": "一碗大灌面 (chenmianmian19977-glitch)",
+  "engines": {
+    "node": ">=18"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "inject": [
+        "@deepseek-ai/dsh-client-locale",
+        "@deepseek-ai/dsh-client-ui-cordis",
+        "@deepseek-ai/dsh-client-ui-conversation",
+        "@deepseek-ai/dsh-client-ui-settings",
+        "@deepseek-ai/dsh-client-modules"
+      ],
+      "external": [
+        "react"
+      ]
+    }
+  }
+}

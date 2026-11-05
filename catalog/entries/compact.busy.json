@@ -1,0 +1,29 @@
+{
+  "id": "compact.busy",
+  "code": "",
+  "templateId": "F07",
+  "title": "压缩暂时不可用",
+  "summary": "已有压缩在进行，或当前轮次尚未空闲。",
+  "causes": [
+    { "text": "存在活跃 compaction 或 agent 非 idle", "certainty": "确定", "evidenceRef": "B4" }
+  ],
+  "impact": "本次压缩请求被拒绝，当前会话未受影响。",
+  "actions": [
+    { "text": "等当前轮次结束后重试", "op": "点按钮" }
+  ],
+  "severity": "info",
+  "retryable": true,
+  "autoRecoverable": false,
+  "causeAssertion": "allowed",
+  "docRefs": ["app.asar:/dsh/node_modules/@deepseek-ai/dsh-command-compact/README.zh.md"],
+  "logRefs": [],
+  "match": {
+    "pattern": "^Compaction is unavailable because this process has an active compaction, or the agent is not idle\\.$",
+    "slots": [],
+    "priority": 95
+  },
+  "version": "0.1.0",
+  "evidence": [
+    { "kind": "source-template", "path": "app.asar:/dsh/node_modules/@deepseek-ai/dsh-command-compact/README.md", "sample": "表格首行 busy" }
+  ]
+}

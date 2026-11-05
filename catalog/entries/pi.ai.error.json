@@ -1,0 +1,48 @@
+{
+  "id": "pi.ai.error",
+  "code": "PI_AI_ERROR",
+  "templateId": "",
+  "title": "模型适配器报错",
+  "summary": "pi-ai 适配器把 provider 的异常包成了这条，具体原因在英文原文里。",
+  "causes": [
+    {
+      "text": "上游 provider 返回了适配器无法归类的错误",
+      "certainty": "需查"
+    }
+  ],
+  "impact": "本轮停止；原始错误信息完整保留。",
+  "actions": [
+    {
+      "text": "看原文里的 provider 字段，通常直接写着原因",
+      "op": "看日志"
+    },
+    {
+      "text": "重试一次；重复出现就换模型",
+      "op": "换模型"
+    }
+  ],
+  "severity": "error",
+  "retryable": true,
+  "autoRecoverable": false,
+  "causeAssertion": "forbidden",
+  "docRefs": [
+    "app.asar:/dsh/node_modules/@deepseek-ai/dsh-llm-pi-ai/lib/index.js"
+  ],
+  "logRefs": [
+    "~/.dsh/storages/session_projcache/sessions/{sessionId}.json"
+  ],
+  "match": {
+    "codeExact": "PI_AI_ERROR",
+    "priority": 90
+  },
+  "version": "0.1.0",
+  "evidence": [
+    {
+      "kind": "source-template",
+      "path": "app.asar:/dsh/node_modules/@deepseek-ai/dsh-llm-pi-ai/lib/index.js",
+      "key": "\"PI_AI_ERROR\"",
+      "sample": "error.code = \"PI_AI_ERROR\" / new HarnessError(…, \"PI_AI_ERROR\")",
+      "count": 1
+    }
+  ]
+}
